@@ -1,7 +1,7 @@
 <template>
 <h1>Reaction Game</h1>
 <button @click="startGame" :disabled="isPlaying">Play</button>
-<Results/>
+<Results v-if="finished" :reactionTime="reactionTime"/>
 <Block v-if="isPlaying" :delay="delay" @boxClicked="boxClicked"/>
 </template>
 
@@ -14,7 +14,10 @@ export default {
   data(){
     return{
       isPlaying:false,
-      delay: null
+      finished:false,
+      delay: null,
+      reactionTime:null,
+
 
     }
   },
@@ -26,9 +29,12 @@ export default {
     startGame(){
       this.delay = 2000 + Math.random()
       this.isPlaying= true
+      this.finished=false
     },
-    boxClicked(){
+    boxClicked(reactionTime){
       this.isPlaying=false
+      this.finished=true
+      this.reactionTime=reactionTime
     }
   }
 }
