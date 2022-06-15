@@ -2,7 +2,7 @@
 <h1>Reaction Game</h1>
 <button @click="startGame" :disabled="isPlaying">Play</button>
 <Results/>
-<Block v-show="isPlaying" @boxClicked="boxClicked"/>
+<Block v-if="isPlaying" :delay="delay" @boxClicked="boxClicked"/>
 </template>
 
 <script>
@@ -25,9 +25,7 @@ export default {
   methods:{
     startGame(){
       this.delay = 2000 + Math.random()
-      setTimeout(()=>{
-        this.isPlaying=true
-      },)
+      this.isPlaying= true
     },
     boxClicked(){
       this.isPlaying=false
@@ -49,11 +47,6 @@ h1{
   color: rgb(16, 88, 28);
 }
 button{
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  color: white;
-  font-size: 23px;
-  background: rgb(12, 100, 49);
 }
 </style>
 
