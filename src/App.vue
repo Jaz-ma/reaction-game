@@ -1,8 +1,8 @@
 <template>
 <h1>Reaction Game</h1>
-<button @click="startGame">Play</button>
+<button @click="startGame" :disabled="isPlaying">Play</button>
 <Results/>
-<Block v-show="showBlock" @boxClicked="boxClicked"/>
+<Block v-show="isPlaying" @boxClicked="boxClicked"/>
 </template>
 
 <script>
@@ -13,7 +13,8 @@ export default {
   name: 'App',
   data(){
     return{
-      showBlock:false,
+      isPlaying:false,
+      delay: null
 
     }
   },
@@ -23,12 +24,13 @@ export default {
   },
   methods:{
     startGame(){
+      this.delay = 2000 + Math.random()
       setTimeout(()=>{
-        this.showBlock=true
-      },Math.random()*2000)
+        this.isPlaying=true
+      },)
     },
     boxClicked(){
-      this.showBlock=false
+      this.isPlaying=false
     }
   }
 }
